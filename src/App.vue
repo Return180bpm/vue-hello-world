@@ -4,11 +4,22 @@
 export default {
     data() {
         return {
+            currentInput: "",
             todoItems: [
                 { id: 1, content: "Do this" },
                 { id: 2, content: "Do that" },
             ],
         };
+    },
+    methods: {
+        handleAddTodoItem() {
+            const newTodoItem = {};
+            newTodoItem.content = this.currentInput;
+            this.todoItems.push(newTodoItem);
+        },
+        handleRemoveTodoItem(indexOfTodoItem) {
+            this.todoItems.splice(indexOfTodoItem, 1);
+        },
     },
 };
 </script>
@@ -16,7 +27,15 @@ export default {
 <template>
     <header>Vue Todo</header>
     <main class="">
-        <div class="p-4"><input class="p-2 border bg-slate-200" /></div>
+        <div class="p-4">
+            <input v-model="currentInput" class="p-2 border bg-slate-200" />
+            <button
+                class="ml-2 p-1 text-sm border-green-500 border-2 rounded-xl text-green-700"
+                @click="handleAddTodoItem"
+            >
+                Add item
+            </button>
+        </div>
         <ul class="bg-stone-600 rounded-md">
             <div
                 v-for="(todoItem, index) in todoItems"
@@ -26,6 +45,7 @@ export default {
                 <li class="inline">{{ todoItem.content }}</li>
                 <button
                     class="ml-2 p-1 text-sm border-orange-500 rounded-xl text-orange-700"
+                    @click="handleRemoveTodoItem(index)"
                 >
                     Remove
                 </button>
