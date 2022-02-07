@@ -28,13 +28,15 @@ export default {
     <header>Vue Todo</header>
     <main class="">
         <div class="p-4">
-            <input v-model="currentInput" class="p-2 border bg-slate-200" />
-            <button
-                class="ml-2 p-1 text-sm border-green-500 border-2 rounded-xl text-green-700"
-                @click="handleAddTodoItem"
-            >
-                Add item
-            </button>
+            <form @submit.prevent="handleAddTodoItem">
+                <input v-model="currentInput" class="p-2 border bg-slate-200" />
+                <button
+                    class="ml-2 p-1 text-sm border-green-500 border-2 rounded-xl text-green-700"
+                    type="submit"
+                >
+                    Add item
+                </button>
+            </form>
         </div>
         <ul class="bg-stone-600 rounded-md">
             <div
